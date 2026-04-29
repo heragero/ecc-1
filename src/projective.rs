@@ -450,4 +450,13 @@ mod tests {
             assert_eq!(result_affine.y.number, expected_affine.y.number);
         }
     }
+
+    #[test]
+    fn test_random_point_mult_order() {
+        let mut rand = rand::thread_rng();
+        let point = ProjectivePoint::<P521>::get_random(&mut rand);
+        let point = point.mul_scalar(&Field::<P521>::new(P521::order().clone()));
+
+        assert!(point.is_infinity());
+    }
 }

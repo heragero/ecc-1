@@ -12,6 +12,8 @@ pub trait EllipticCurve: Modulus {
 
     fn gen_x() -> &'static BigUint;
     fn gen_y() -> &'static BigUint;
+
+    fn order() -> &'static BigUint;
 }
 
 #[derive(PartialEq, Clone)]
@@ -47,6 +49,12 @@ lazy_static! {
             16,
         )
     .unwrap();
+
+    static ref N: BigUint = BigUint::from_str_radix(
+            "01fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa51868783bf2f966b7fcc0148f709a5d03bb5c9b8899c47aebb6fb71e91386409",
+            16,
+        )
+    .unwrap();
 }
 
 impl Modulus for P521 {
@@ -70,5 +78,9 @@ impl EllipticCurve for P521 {
 
     fn gen_y() -> &'static BigUint {
         &G_Y
+    }
+
+    fn order() -> &'static BigUint {
+        &N
     }
 }
