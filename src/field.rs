@@ -74,6 +74,10 @@ impl<M: Modulus> Field<M> {
 
         Ok(Self::new(number))
     }
+
+    pub fn to_hex(&self) -> String {
+        format!("{:0x}", self.number)
+    }
 }
 
 impl<M: Modulus> AddAssign for Field<M> {

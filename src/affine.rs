@@ -104,6 +104,10 @@ impl<M: EllipticCurve> AffinePoint<M> {
 
         Self::new(x, y)
     }
+
+    pub fn to_hex(&self) -> String {
+        format!("  x: {:0x}\n  y: {:0x}", self.x.number, self.y.number)
+    }
 }
 
 impl<M: EllipticCurve> Add for &AffinePoint<M> {

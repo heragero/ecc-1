@@ -1,4 +1,4 @@
-#![allow(clippy::suspicious_arithmetic_impl)]
+#![allow(clippy::suspicious_arithmetic_impl, unused)]
 
 use std::hint::black_box;
 use std::time::Instant;
@@ -6,12 +6,14 @@ use std::time::Instant;
 use rand::thread_rng;
 
 use crate::{
+    crypto::test_crypto,
     field::Field,
     modulus::{EllipticCurve, P521},
     projective::ProjectivePoint,
 };
 
 mod affine;
+mod crypto;
 mod field;
 mod modulus;
 mod projective;
@@ -19,7 +21,7 @@ mod projective;
 const ITERATIONS: u32 = 100;
 type MainPoint = ProjectivePoint<P521>;
 
-fn main() {
+fn bench() {
     println!("Starting Elliptic Curve Operations Benchmark...");
     println!("Curve: P-521");
     println!("Iterations per operation: {}", ITERATIONS);
@@ -83,4 +85,8 @@ fn main() {
     println!("  Addition:       {:?}", duration_add / ITERATIONS);
     println!("  Doubling:       {:?}", duration_double / ITERATIONS);
     println!("  Scalar Mul:     {:?}", duration_mul / ITERATIONS);
+}
+
+fn main() {
+    test_crypto();
 }
